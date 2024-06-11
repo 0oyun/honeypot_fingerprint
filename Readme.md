@@ -10,7 +10,7 @@ docker pull dinotools/dionaea:sha-4e459f1b
 ```
 
 ```bash
-docker run -d --name dionaea-0.9 -p 21:21 -p 42:42 -p 80:80 -p 443:443 -p 445:445 -p 3306:3306 -p 5060:5060 -p 11211:11211 -p 27017:27017 dinotools/dionaea:sha-4e459f1b
+docker run -d --name dionaea -p 21:21 -p 42:42 -p 80:80 -p 443:443 -p 445:445 -p 3306:3306 -p 5060:5060 -p 11211:11211 -p 27017:27017 dinotools/dionaea:sha-4e459f1b
 ```
 
 **Conpot docker**

@@ -1,10 +1,12 @@
-import requests
+
 import logging
-from scapy.all import conf, hexdump, Packet, ByteField, ShortField
-from scapy.packet import Raw
+logging.getLogger("scapy").setLevel(logging.CRITICAL)
 import socket
-import sys
-conf.iface = "en0"
+from scapy.packet import Raw
+from scapy.all import conf, hexdump, Packet, ByteField, ShortField
+import requests
+
+# conf.iface = 'en0'
 COTP_PACKET = b'\x03\x00\x00\x16\x11\xe0\x00\x00\x00\x05\x00\xc1\x02\x01\x00\xc2\x02\x02\x00\xc0\x01\x0a'
 ROSCTR_SETUP = b'\x03\x00\x00\x19\x02\xf0\x80\x32\x01\x00\x00\x00\x00\x00\x08\x00\x00\xf0\x00\x00\x01\x00\x01\x01\xe0'
 FIRST_SZL_REQ = b'\x03\x00\x00\x21\x02\xf0\x80\x32\x07\x00\x00\x00\x00\x00\x08\x00\x08\x00\x01\x12\x04\x11\x44\x01\x00\xff\x09\x00\x04\x00\x11\x00\x01'
@@ -64,7 +66,8 @@ def get_s7_MODBUS_info(ip):
         # hexdump(second_szl_resp)
         return second_szl_resp
     except Exception as error:
-        logging.error(f'Error occurred: {error}')
+        # logging.error(f'Error occurred: {error}')
+        pass
     finally:
         sock.close()
     return None
@@ -114,3 +117,10 @@ def main(ip):
     result.append(s7_result[0])
     result.append(s7_result[1])
     return result
+
+
+if __name__ == "__main__":
+
+    result = main("127.0.0.1")
+
+    print(result)
