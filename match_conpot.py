@@ -96,14 +96,15 @@ def s7_MODBUS_match(ip):
         response = get_s7_MODBUS_info(ip)
         if response:
             p = Raw(response)
-            serial_num = get_string(p, SERIAL_NUM_OFFSET)
-            hardware = get_string(p, HARDWARE_OFFSET)
+            # serial_num = get_string(p, SERIAL_NUM_OFFSET)
+            # hardware = get_string(p, HARDWARE_OFFSET)
             # print(f'Serial Number: {serial_num}')
             # print(f'Hardware: {hardware}')
-            if serial_fingerprint in serial_num:
+            if serial_fingerprint in p.load.decode('ascii', errors='ignore'):
                 result[0] = True
-            if hardware_fingerprint in hardware:
+            if hardware_fingerprint in p.load.decode('ascii', errors='ignore'):
                 result[1] = True
+
     except Exception as e:
         # print(f"Error connecting to {ip}: {e}")
         pass
